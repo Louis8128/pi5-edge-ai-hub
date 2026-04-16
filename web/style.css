@@ -1,83 +1,175 @@
 body {
     font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f4f9;
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei",
+        sans-serif;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    color: #333;
 }
 .chat-container {
-    width: 400px;
+    width: 850px; /* 拓宽为桌面级应用尺寸 */
+    height: 90vh; /* 占据屏幕 90% 的高度 */
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 .header {
-    background: #2c3e50;
-    color: white;
-    padding: 15px;
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 20px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1.1em;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
 }
 .chat-box {
-    height: 400px;
-    padding: 15px;
+    flex: 1; /* 自动撑满剩余高度 */
+    padding: 24px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    scroll-behavior: smooth;
 }
 .message {
-    padding: 10px 14px;
-    border-radius: 18px;
-    max-width: 80%;
-    line-height: 1.4;
+    display: flex;
+    max-width: 85%;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease-out;
 }
 .user-msg {
+    align-self: flex-end;
+}
+.user-msg .msg-content {
     background: #007aff;
     color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
+    padding: 12px 18px;
+    border-radius: 18px 18px 4px 18px;
 }
 .ai-msg {
-    background: #e5e5ea;
-    color: black;
     align-self: flex-start;
-    border-bottom-left-radius: 4px;
+    width: 100%;
 }
+.ai-msg .msg-content {
+    background: transparent;
+    color: #2c3e50;
+}
+
+/* 输入区样式升级 */
 .input-area {
     display: flex;
-    border-top: 1px solid #ddd;
-    padding: 10px;
+    border-top: 1px solid #eaeaea;
+    padding: 16px 24px;
     background: #fff;
+    align-items: flex-end;
 }
-input {
+textarea {
     flex: 1;
-    padding: 10px;
+    padding: 14px;
     border: 1px solid #ddd;
-    border-radius: 20px;
+    border-radius: 12px;
     outline: none;
-    margin-right: 10px;
+    margin-right: 16px;
+    resize: none; /* 禁止手动拖拽大小 */
+    height: 24px; /* 初始单行高度 */
+    min-height: 24px;
+    max-height: 120px; /* 最高输入区域 */
+    font-family: inherit;
+    font-size: 1em;
+    transition: border-color 0.2s;
+}
+textarea:focus {
+    border-color: #007aff;
 }
 button {
-    background: #2c3e50;
+    background: #1a1a1a;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 14px 24px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    height: 54px; /* 和文本框对齐 */
 }
 button:hover {
-    background: #1a252f;
+    background: #333;
+    transform: translateY(-1px);
 }
 button:disabled {
     background: #95a5a6;
     cursor: not-allowed;
+    transform: none;
+}
+
+/* ======== Markdown 排版深度定制 ======== */
+.ai-msg .msg-content p {
+    margin: 0 0 10px 0;
+}
+.ai-msg .msg-content p:last-child {
+    margin-bottom: 0;
+}
+.ai-msg .msg-content code {
+    background: #f0f2f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #e83e8c;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+}
+/* 代码块的高级样式 */
+.ai-msg .msg-content pre {
+    background: #0d1117;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 12px 0;
+}
+.ai-msg .msg-content pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+.ai-msg .msg-content ul,
+.ai-msg .msg-content ol {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+.ai-msg .msg-content blockquote {
+    border-left: 4px solid #ddd;
+    padding-left: 14px;
+    color: #666;
+    margin: 10px 0;
+    background: #f9f9f9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
