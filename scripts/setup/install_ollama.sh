@@ -15,13 +15,12 @@ else
     exit 1
 fi
 
-# 3. 预下载轻量级大模型
-# 这里为你选择了微软的 Phi-3 Mini。它体积小巧，在树莓派 5 上推理速度极快，非常适合做初步测试。
+# 3. 预下载轻量级LLM 微软的 Phi-3 Mini
 MODEL_NAME="phi3:mini"
 echo "[Step 2] Pulling the LLM: $MODEL_NAME..."
 echo "(This may take a few minutes depending on your internet speed...)"
 ollama pull $MODEL_NAME
 
 echo "===================================================="
-echo "🎉 All Done! You can now chat with your local AI."
+echo "All Done! You can now chat with your local AI."
 echo "Test it with: ollama run $MODEL_NAME 'Hello, who are you?'"
