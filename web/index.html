@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edge AI Hub - 树莓派私有模型</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="chat-container">
+            <div class="header">Phi-3 Mini (Powered by Pi 5)</div>
+            <div class="chat-box" id="chatBox">
+                <div class="message ai-msg">
+                    你好！我是运行在你树莓派上的本地 AI，有什么我可以帮忙的？
+                </div>
+            </div>
+            <div class="input-area">
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="输入你的问题..."
+                    onkeypress="handleEnter(event)"
+                />
+                <button id="sendBtn" onclick="sendMessage()">发送</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
